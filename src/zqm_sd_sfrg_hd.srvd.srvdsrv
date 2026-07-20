@@ -1,0 +1,6 @@
+@EndUserText.label: 'Service Definition Setup Approval Forging New'
+define service ZQM_SD_SFRG_HD {
+  expose ZQM_C_SFRG_HD as Head;
+  expose ZQM_C_SFRG_IT as Item;
+  expose ZQM_C_SFRG_QP as QualityParam;
+}

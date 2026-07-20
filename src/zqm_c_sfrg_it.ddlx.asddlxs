@@ -1,0 +1,83 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName       : 'Inspection Parameter',
+    typeNamePlural : 'Inspection Parameters',
+    title          : { type: #STANDARD, label: 'Parameters', value: 'Itemno' },
+    description    : { type: #STANDARD, value: 'Parameters' }
+  }
+}
+annotate entity ZQM_C_SFRG_IT with
+{
+  @UI.facet: [
+  {
+    id      : 'GeneralInfo',
+    label   : 'Observations',
+    type    : #IDENTIFICATION_REFERENCE,
+    purpose : #STANDARD,
+    position: 10
+  } ]
+
+  @UI.hidden: true
+  Cuuid;
+
+  @UI.identification: [{ position: 10, label: 'Sr. No' }]
+  @UI.lineItem      : [{ position: 10, label: 'Sr.' }]
+  Itemno;
+
+  @UI.identification: [{ position: 20, label: 'Parameters' }]
+  @UI.lineItem      : [{ position: 20, label: 'Parameters' }]
+  Parameters;
+
+  @UI.identification: [{ position: 30, label: 'Specifications' }]
+  @UI.lineItem      : [{ position: 30, label: 'Specifications' }]
+  Specifications;
+
+  @UI.identification: [{ position: 40, label: 'MMR' }]
+  @UI.lineItem      : [{ position: 40, label: 'MMR' }]
+  Mmr;
+
+ // @UI.identification: [{ position: 45, label: 'Station' }]
+ // @UI.lineItem      : [{ position: 45, label: 'Station' }]
+ // Station;
+
+  @UI.identification: [{ position: 50, label: 'Obs 1' }]
+  @UI.lineItem      : [{ position: 50, label: 'Obs 1' }]
+  obs1_t;
+
+  @UI.identification: [{ position: 60, label: 'Obs 2', criticality: 'obs2criticality' }]
+  @UI.lineItem      : [{ position: 60, label: 'Obs 2' }]
+  obs2_t;
+
+  @UI.identification: [{ position: 70, label: 'Obs 3' }]
+  @UI.lineItem      : [{ position: 70, label: 'Obs 3' }]
+  obs3_t;
+
+  @UI.identification: [{ position: 80, label: 'Obs 4' }]
+  @UI.lineItem      : [{ position: 80, label: 'Obs 4' }]
+  obs4_t;
+
+  @UI.identification: [{ position: 90, label: 'Obs 5' }]
+  @UI.lineItem      : [{ position: 90, label: 'Obs 5' }]
+  obs5_t;
+
+  @UI.identification: [{ position: 100, label: 'Obs 6' }]
+  @UI.lineItem      : [{ position: 100, label: 'Obs 6' }]
+  Obs1;
+
+  @UI.identification: [{ position: 110, label: 'Obs 7' }]
+  @UI.lineItem      : [{ position: 110, label: 'Obs 7' }]
+  Obs2;
+
+  @UI.identification: [{ position: 120, label: 'Obs 8' }]
+  @UI.lineItem      : [{ position: 120, label: 'Obs 8' }]
+  Obs3;
+
+  @UI.identification: [{ position: 130, label: 'Obs 9' }]
+  @UI.lineItem      : [{ position: 130, label: 'Obs 9' }]
+  Obs4;
+
+  @UI.identification: [{ position: 140, label: 'Obs 10' }]
+  @UI.lineItem      : [{ position: 140, label: 'Obs 10' }]
+  Obs5;
+}

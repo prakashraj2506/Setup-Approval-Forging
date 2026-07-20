@@ -1,0 +1,203 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName       : 'Setup Approval Forging',
+    typeNamePlural : 'Setup Approval Forging',
+    title          : { type: #STANDARD, label: 'Setup Approval Forging', value: 'setupapprovalno' },
+    description    : { type: #STANDARD, value: 'setupapprovalno' }
+  }
+}
+annotate entity ZQM_C_SFRG_HD with
+{
+  @UI.facet: [
+  {
+    id      : 'GeneralInfo',
+    label   : 'Header',
+    type    : #IDENTIFICATION_REFERENCE,
+    purpose : #STANDARD,
+    position: 10
+  },
+  //  {
+  //    id              : 'UnitInfo',
+  //    label           : 'Unit Selection',
+  //    targetQualifier : 'UnitInfo',
+  //    type            : #IDENTIFICATION_REFERENCE,
+  //    purpose         : #STANDARD,
+  //    position        : 12
+  //  },
+  {
+    id            : 'LOT_I1',
+    purpose       : #STANDARD,
+    type          : #LINEITEM_REFERENCE,
+    label         : 'Inspection Parameters',
+    position      : 20,
+    targetElement : '_Item'
+  },
+
+  {
+    id            : 'QualityParams',
+    purpose       : #STANDARD,
+    type          : #LINEITEM_REFERENCE,
+    label         : 'Quality Parameters',
+    position      : 22,
+    targetElement : '_QualityParam'
+  },
+
+  {
+    id              : 'MonogramImages',
+    label           : 'Monogram Stamping',
+    targetQualifier : 'MonogramImages',
+    type            : #IDENTIFICATION_REFERENCE,
+    purpose         : #STANDARD,
+    position        : 25
+  },
+  {
+    id              : 'footer',
+    label           : 'Footer',
+    targetQualifier : 'footer',
+    type            : #IDENTIFICATION_REFERENCE,
+    purpose         : #STANDARD,
+    position        : 30
+  } ]
+
+  @UI.identification: [{ type: #FOR_ACTION, dataAction: 'getpdf', label: 'Get PDF' }]
+  Cuuid;
+
+  @UI.identification: [{ position: 10, label: 'Setup Approval No.' }]
+  @UI.lineItem      : [{ position: 10, label: 'Setup Approval No.' }]
+  setupapprovalno;
+
+  @UI.identification: [{ position: 20, label: 'Plant' }]
+  @UI.lineItem      : [{ position: 20, label: 'Plant' }]
+  Plant;
+
+  @UI.identification: [{ position: 30, label: 'Material' }]
+  @UI.lineItem      : [{ position: 30, label: 'Material' }]
+  Material;
+
+  @UI.identification: [{ position: 40, label: 'Manufacturing Order' }]
+  @UI.lineItem      : [{ position: 40, label: 'Manufacturing Order' }]
+  @EndUserText.label: 'Manufacturing Order'
+  Manufacturingorder;
+
+  @UI.identification: [{ position: 50, label: 'Batch/Lot No' }]
+  @UI.lineItem      : [{ position: 50, label: 'Batch/Lot No' }]
+  Batch;
+
+  @UI.identification: [{ position: 60, label: 'Date' }]
+  zdate;
+
+  @UI: { identification: [ { position: 100 } ] }
+  @EndUserText.label: 'Form'
+  Attachments;
+
+  @UI: { identification: [ { position: 200 } ] }
+  @EndUserText.label: 'Part No'
+  Partno;
+
+  @UI: { identification: [ { position: 210 } ] }
+  @EndUserText.label: 'Specification as per Drawing / PPC Plan'
+  Grade;
+
+  @UI: { identification: [ { position: 220 } ] }
+  @EndUserText.label: 'Part Description'
+  partdesc;
+
+  @UI: { identification: [ { position: 230 } ] }
+  @EndUserText.label: 'SKS Drg. No'
+  Drgno;
+
+  // @UI: { identification: [ { position: 240 } ] }
+  // @EndUserText.label: 'Lot No.'
+  // Lotno;
+
+  @UI: { identification: [ { position: 250 } ] }
+  @EndUserText.label: 'Raw Material Specification'
+  rawmatspec;
+
+  @UI: { identification: [ { position: 260 } ] }
+  @EndUserText.label: 'Operator'
+  operator;
+
+  @UI: { identification: [ { position: 270 } ] }
+  @EndUserText.label: 'Current Operation No'
+  currentoperationno;
+
+  @UI: { identification: [ { position: 280 } ] }
+  @EndUserText.label: 'Operation Details'
+  operationdetails;
+
+  //  @UI: { identification: [ { position: 290 } ] }
+  // @EndUserText.label: 'Tool Number'
+  // toolno;
+
+  @UI: { identification: [ { position: 300 } ] }
+  @EndUserText.label: 'Inspector'
+  inspector;
+
+  @UI: { identification: [ { position: 310 } ] }
+  @EndUserText.label: 'Previous Operation'
+  previousoperation;
+
+  @UI: { identification: [ { position: 320 } ] }
+  @EndUserText.label: 'Next Operation'
+  nextoperation;
+
+  @UI: { identification: [ { position: 330 } ] }
+  @EndUserText.label: 'Shift'
+  dateshift;
+
+  @UI: { identification: [ { position: 340 } ] }
+  @EndUserText.label: 'Machine'
+  machine;
+
+  // @UI: { identification: [ { position: 350 } ] }
+  // @EndUserText.label: 'Specification as per Drawing / PPC Plan'
+  // @UI.multiLineText: true
+  // SpecPerDrawing;
+
+  //  @UI: { identification: [ { position: 10, qualifier: 'UnitInfo' } ] }
+  //  @EndUserText.label: 'Unit-II'
+  //  UnitII;
+  //
+  //  @UI: { identification: [ { position: 20, qualifier: 'UnitInfo' } ] }
+  //  @EndUserText.label: 'Unit-IV'
+  //  UnitIV;
+
+  @UI: { identification: [ { position: 10, qualifier: 'MonogramImages' } ] }
+  @EndUserText.label: 'Monogram Stamping By Forging'
+  ImgForging;
+
+  @UI: { identification: [ { position: 20, qualifier: 'MonogramImages' } ] }
+  @EndUserText.label: 'Monogram Stamping By Quality'
+  ImgQuality;
+
+  @UI: { identification: [ { position: 10, qualifier: 'footer' } ] }
+  @EndUserText.label: 'Remarks'
+  @UI.multiLineText: true
+  remarks;
+
+//  @UI: { identification: [ { position: 20, qualifier: 'footer' } ] }
+//  @EndUserText.label: 'Setup Approval Filled By'
+//  inspectby;
+
+
+  @UI: { identification: [ { position: 30, qualifier: 'footer' } ] }
+  @EndUserText.label: 'Setup approval filled by Name & Sign'
+  submittedtoprd;
+
+  @UI: { identification: [ { position: 40, qualifier: 'footer' } ] }
+  @EndUserText.label: ' Setup approval verified by Name&Sign'
+  submittedtoqa;
+
+  @UI: { identification: [ { position: 50, qualifier: 'footer' } ] }
+  @EndUserText.label: 'Submitted to QA by Production - Time'
+  submittedtoqa_time;
+
+  @UI: { identification: [ { position: 60, qualifier: 'footer' } ] }
+  @EndUserText.label: 'Submitted to Production by QA - Time'
+  submittedtoprd_time;
+
+  @UI.hidden: true
+  _Item;
+}

@@ -1,0 +1,204 @@
+managed implementation in class zbp_qm_i_sfrg_hd unique;
+strict ( 2 );
+with draft;
+
+define behavior for zqm_i_sfrg_hd
+persistent table zqm_t_sfrg_hd
+draft table zqm_t_sfrg_hdd
+with additional save
+etag master LocalLastChangedOn
+lock master total etag ChangedOn
+authorization master ( instance )
+{
+  create ( authorization : none );
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  field ( numbering : managed, readonly ) Cuuid;
+
+  field ( readonly ) setupapprovalno, Drgno, RmSpecification, Partno, Grade,
+    currentoperationno, operationdetails,
+    CreatedOn, createdby, nextoperation, previousoperation,
+    Material, plant, changedon, changedby,
+    locallastchangedon, locallastchangedby, rawmatspec, partdesc;
+
+  field ( features : instance ) Manufacturingorder, Batch;
+
+  association _Item { create; with draft; }
+  association _QualityParam { create; with draft; }
+
+  factory action getItem [1..*];
+  action getpdf result [1] $self;
+
+  determination createSetupNo on save { create; }
+  determination updateHeaderDetails on modify { field Manufacturingorder; }
+  determination verifyGrade on modify { field grade; }
+
+  side effects {
+    action getItem affects $self;
+    field Material affects field Drgno,
+                          field RmSpecification,
+                          field Partno,
+                          field Grade;
+  }
+
+  mapping for zqm_t_sfrg_hd
+  {
+
+    Cuuid                   = cuuid;
+    Inspectionlot           = inspectionlot;
+    Lotcreate               = lotcreate;
+    Startofinsp             = startofinsp;
+    Endofinsp               = endofinsp;
+    Plant                   = plant;
+    Material                = material;
+    Customer                = customer;
+    Baseunit                = baseunit;
+    Manufacturingorder      = manufacturingorder;
+    Inspectionlotobjecttext = inspectionlotobjecttext;
+    Batch                   = batch;
+    Supplier                = supplier;
+    Manufacturer            = manufacturer;
+    Inspectionoperation     = inspectionoperation;
+    Inspection              = inspection;
+    Salesorder              = salesorder;
+    Drgno                   = drgno;
+    RmSpecification         = rm_specification;
+    ToolNo                  = toolno;
+    Grade                   = grade;
+    Partno                  = partno;
+    Operationtext           = operationtext;
+    Workcentertext          = workcentertext;
+    Operationconfirmation   = operationconfirmation;
+    Shift                   = shift;
+    Operatorname            = operatorname;
+    Previousopt             = previousopt;
+    Nextopt                 = nextopt;
+    Filename                = filename;
+    Attachments             = attachments;
+    Mimetype                = mimetype;
+    Materialdescription     = materialdescription;
+    Customername            = customername;
+    QtyChkd                 = qty_chkd;
+    InvNo                   = inv_no;
+    InvDate                 = inv_date;
+    CustDraw                = cust_draw;
+    SksDraw                 = sks_draw;
+    Materiallongtxt         = materiallongtxt;
+    FilenameUl              = filename_ul;
+    AttachmentsUl           = attachments_ul;
+    MimetypeUl              = mimetype_ul;
+    Formtype                = formtype;
+    refnum                  = refnum;
+    partdesc                = partdesc;
+    rawmatspec              = rawmatspec;
+    operator                = operator;
+    currentoperationno      = currentoperationno;
+    operationdetails        = operationdetails;
+    inspector               = inspector;
+    previousoperation       = previousoperation;
+    nextoperation           = nextoperation;
+    dateshift               = dateshift;
+    machine                 = machine;
+    remarks                 = remarks;
+    inspectby               = inspectby;
+    submittedtoprd          = submittedtoprd;
+    submittedtoqa           = submittedtoqa;
+    submittedtoprd_time     = submittedtoprd_time;
+    submittedtoqa_time      = submittedtoqa_time;
+    setupapprovalno         = setupapprovalno;
+    zdate                   = zdate;
+    UnitII                  = unit_ii;
+    UnitIV                  = unit_iv;
+    Lotno                   = lotno;
+    SpecPerDrawing          = spec_per_drawing;
+    ImgForging              = img_forging;
+    ImgForgingMime          = img_forging_mime;
+    ImgForgingFile          = img_forging_file;
+    ImgQuality              = img_quality;
+    ImgQualityMime          = img_quality_mime;
+    ImgQualityFile          = img_quality_file;
+    CreatedOn               = created_on;
+    CreatedBy               = created_by;
+    ChangedOn               = changed_on;
+    ChangedBy               = changed_by;
+    LocalLastChangedOn      = local_last_changed_on;
+    LocalLastChangedBy      = local_last_changed_by;
+  }
+}
+
+
+define behavior for zqm_i_sfrg_it
+persistent table zqm_t_sfrg_it
+draft table zqm_t_sfrg_itd
+with additional save
+lock dependent by _HDR
+authorization dependent by _HDR
+{
+  update;
+  delete;
+
+  field ( readonly ) Cuuid, Itemno, Parameters, Specifications, Mmr;
+  field ( features : instance ) obs1, obs1_t, Obs2, obs2_t, obs3, obs3_t,
+    obs4, obs4_t, obs5, obs5_t;
+
+  association _HDR { with draft; }
+
+  mapping for zqm_t_sfrg_it
+  {
+    Cuuid           = cuuid;
+    Itemno          = itemno;
+    Parameters      = parameters;
+    Specifications  = specifications;
+    Mmr             = mmr;
+    Obs1            = obs1;
+    Obs2            = obs2;
+    Obs3            = obs3;
+    Obs4            = obs4;
+    Obs5            = obs5;
+    obs1_t          = obs1_t;
+    obs2_t          = obs2_t;
+    obs3_t          = obs3_t;
+    obs4_t          = obs4_t;
+    obs5_t          = obs5_t;
+    obs1criticality = obs1criticality;
+    obs2criticality = obs2criticality;
+    obs3criticality = obs3criticality;
+    obs4criticality = obs4criticality;
+    obs5criticality = obs5criticality;
+  }
+}
+
+
+define behavior for zqm_i_sfrg_qp
+persistent table zqm_t_sfrg_qp
+draft table zqm_t_sfrg_qpd
+with additional save
+lock dependent by _HDR
+authorization dependent by _HDR
+{
+  update;
+  delete;
+
+  field ( readonly ) Cuuid, Itemno, Parameters, Specifications, Mmr, Station;
+
+  association _HDR { with draft; }
+
+  mapping for zqm_t_sfrg_qp
+  {
+    Cuuid          = cuuid;
+    Itemno         = itemno;
+    Parameters     = parameters;
+    Specifications = specifications;
+    Mmr            = mmr;
+    Station        = station;
+    Observation    = observation;
+    Result1         = result1;
+  }
+}

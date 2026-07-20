@@ -1,0 +1,39 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZQM_C_SFRG_HD
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+  use action getItem;
+  use action getpdf;
+
+  field ( mandatory : create ) Manufacturingorder, Batch;
+
+  use association _Item { create; with draft; }
+  use association _QualityParam { create; with draft; }
+}
+
+define behavior for ZQM_C_SFRG_IT
+{
+  use update;
+  use delete;
+
+  use association _HDR { with draft; }
+}
+
+define behavior for ZQM_C_SFRG_QP
+{
+  use update;
+  use delete;
+
+  use association _HDR { with draft; }
+}

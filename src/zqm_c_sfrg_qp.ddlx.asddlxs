@@ -1,0 +1,51 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: {
+    typeName       : 'Quality Parameter',
+    typeNamePlural : 'Quality Parameters',
+    title          : { type: #STANDARD, value: 'Itemno' },
+    description    : { type: #STANDARD, value: 'Parameters' }
+  }
+}
+annotate entity ZQM_C_SFRG_QP with
+{
+  @UI.facet: [
+  {
+    id       : 'General',
+    label    : 'Details',
+    type     : #IDENTIFICATION_REFERENCE,
+    purpose  : #STANDARD,
+    position : 10
+  } ]
+
+  @UI.hidden: true
+  Cuuid;
+
+  @UI.lineItem: [{ position: 10, label: 'Sr.' }]
+  @UI.identification: [{ position: 10, label: 'Sr. No.' }]
+  Itemno;
+
+  @UI.lineItem: [{ position: 20, label: 'Parameter' }]
+  @UI.identification: [{ position: 20, label: 'Parameter' }]
+  Parameters;
+
+  @UI.lineItem: [{ position: 30, label: 'Specification' }]
+  @UI.identification: [{ position: 30, label: 'Specification' }]
+  Specifications;
+
+  @UI.lineItem: [{ position: 40, label: 'MMR' }]
+  @UI.identification: [{ position: 40, label: 'MMR' }]
+  Mmr;
+
+  @UI.lineItem: [{ position: 50, label: 'Station' }]
+  @UI.identification: [{ position: 50, label: 'Station' }]
+  Station;
+
+  @UI.lineItem: [{ position: 60, label: 'Observation' }]
+  @UI.identification: [{ position: 60, label: 'Observation' }]
+  Observation;
+
+  @UI.lineItem: [{ position: 70, label: 'Result' }]
+  @UI.identification: [{ position: 70, label: 'Result' }]
+  Result1;
+}
